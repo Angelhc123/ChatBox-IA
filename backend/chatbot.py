@@ -1,6 +1,7 @@
 from typing import List
 from models import ChatResponse
 import google.generativeai as genai
+import os
 
 class OrientadorUniversitarioChatbot:
     """
@@ -14,8 +15,11 @@ class OrientadorUniversitarioChatbot:
             "basado en sus intereses y habilidades."
         )
         self.historial = []
-        # Configurar Gemini con la API Key proporcionada
-        genai.configure(api_key="AIzaSyCM7mbsKL6oUSfUkS6NPT_unvgLz7lE1zQ")
+        # Configurar Gemini con la API Key desde variable de entorno
+        api_key = os.getenv("GOOGLE_API_KEY")
+        if not api_key:
+            raise ValueError("GOOGLE_API_KEY environment variable is required")
+        genai.configure(api_key=api_key)
         self.model = genai.GenerativeModel('gemini-2.0-flash')
 
     def construir_prompt(self, intereses: List[str], habilidades: List[str], historial: list = None) -> str:
