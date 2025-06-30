@@ -15,7 +15,7 @@ class OrientadorUniversitarioChatbot:
         )
         self.historial = []
         # Configurar Gemini con la API Key proporcionada
-        genai.configure(api_key="API_KEY_AQUI")
+        genai.configure(api_key="AIzaSyCM7mbsKL6oUSfUkS6NPT_unvgLz7lE1zQ")
         self.model = genai.GenerativeModel('gemini-2.0-flash')
 
     def construir_prompt(self, intereses: List[str], habilidades: List[str], historial: list = None) -> str:
